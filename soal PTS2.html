@@ -1,0 +1,2717 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTS KIK XI TKJ - SMKN 1 Kota Serang</title>
+
+<!-- QR CODE LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+:root{
+    --primary:#1e3a8a;
+    --primary2:#2563eb;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#d97706;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#64748b;
+    --border:#e2e8f0;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.header{
+    background:linear-gradient(135deg,#172554,#1d4ed8);
+    color:white;
+    padding:20px;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:white;
+    color:var(--primary);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:18px;
+    flex-shrink:0;
+}
+
+.header h1{
+    margin:0;
+    font-size:24px;
+}
+
+.header p{
+    margin:5px 0 0;
+    opacity:.9;
+}
+
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 5px 20px rgba(15,23,42,.07);
+    border:1px solid var(--border);
+}
+
+.hidden{
+    display:none!important;
+}
+
+.title{
+    font-size:25px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.field label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    padding:13px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary2);
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 18px;
+    font-weight:bold;
+    font-size:15px;
+    color:white;
+    background:var(--primary2);
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.btn-success{
+    background:var(--success);
+}
+
+.btn-danger{
+    background:var(--danger);
+}
+
+.btn-warning{
+    background:var(--warning);
+}
+
+.btn-secondary{
+    background:#475569;
+}
+
+.btn-light{
+    background:#e2e8f0;
+    color:#172033;
+}
+
+.btn-large{
+    padding:15px 25px;
+    font-size:17px;
+}
+
+.center{
+    text-align:center;
+}
+
+.notice{
+    padding:15px;
+    background:#eff6ff;
+    border-left:5px solid var(--primary2);
+    border-radius:8px;
+    margin:15px 0;
+    line-height:1.6;
+}
+
+.warning{
+    padding:15px;
+    background:#fff7ed;
+    border-left:5px solid var(--warning);
+    border-radius:8px;
+}
+
+.timer{
+    position:sticky;
+    top:10px;
+    z-index:20;
+    background:#172554;
+    color:white;
+    border-radius:12px;
+    padding:12px 18px;
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.timer.warning-time{
+    background:#b45309;
+}
+
+.timer.danger-time{
+    background:#b91c1c;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.65;}
+}
+
+.progress-wrap{
+    background:#e2e8f0;
+    height:12px;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0 20px;
+}
+
+.progress{
+    height:100%;
+    background:#2563eb;
+    width:0%;
+    transition:.3s;
+}
+
+.question-number{
+    color:var(--primary2);
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.question-text{
+    font-size:19px;
+    line-height:1.6;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.option{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding:15px;
+    border:2px solid #e2e8f0;
+    border-radius:12px;
+    margin:10px 0;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#93c5fd;
+    background:#f8fbff;
+}
+
+.option.selected{
+    border-color:#2563eb;
+    background:#eff6ff;
+}
+
+.option input{
+    margin-top:4px;
+}
+
+.navigation{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:25px;
+}
+
+.navigator{
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+    gap:7px;
+    margin-top:15px;
+}
+
+.nav-number{
+    border:0;
+    padding:9px 3px;
+    border-radius:7px;
+    background:#e2e8f0;
+    font-weight:bold;
+}
+
+.nav-number.answered{
+    background:#16a34a;
+    color:white;
+}
+
+.nav-number.current{
+    outline:3px solid #2563eb;
+}
+
+.nav-number.unanswered{
+    background:#e2e8f0;
+}
+
+.stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:20px;
+    border-radius:15px;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    text-align:center;
+}
+
+.stat .number{
+    font-size:30px;
+    font-weight:bold;
+    color:var(--primary);
+}
+
+.stat .label{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th,td{
+    border-bottom:1px solid var(--border);
+    padding:11px;
+    text-align:left;
+}
+
+th{
+    background:#eff6ff;
+    color:#1e3a8a;
+}
+
+.status{
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status-selesai{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status-belum{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.qr-area{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+#qrcode{
+    margin:20px auto;
+    padding:15px;
+    background:white;
+}
+
+.url-box{
+    width:100%;
+    max-width:650px;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+}
+
+.footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#dbeafe;
+    color:#1e40af;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.result-score{
+    font-size:60px;
+    font-weight:bold;
+    color:#1d4ed8;
+}
+
+.result-box{
+    text-align:center;
+    padding:30px;
+}
+
+.small{
+    font-size:13px;
+    color:#64748b;
+}
+
+.teacher-bar{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+@media(max-width:700px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .stat-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .navigator{
+        grid-template-columns:repeat(5,1fr);
+    }
+
+    .header h1{
+        font-size:19px;
+    }
+
+    .question-text{
+        font-size:17px;
+    }
+
+    .card{
+        padding:18px;
+    }
+}
+
+@media print{
+    body{
+        background:white;
+    }
+
+    .no-print{
+        display:none!important;
+    }
+
+    .card{
+        box-shadow:none;
+        border:0;
+    }
+
+    #qrcode{
+        margin:20px auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+HEADER
+===================================================== -->
+
+<header class="header">
+<div class="header-inner">
+
+    <div class="logo">TKJ</div>
+
+    <div>
+        <h1>SMKN 1 KOTA SERANG</h1>
+        <p>PTS Kreativitas, Inovasi, dan Kewirausahaan</p>
+    </div>
+
+</div>
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+HALAMAN BERANDA
+===================================================== -->
+
+<section id="homePage" class="card">
+
+    <div class="center">
+
+        <div class="badge">
+            FASE F / XI TKJ
+        </div>
+
+        <h2 class="title">
+            PENILAIAN TENGAH SEMESTER
+        </h2>
+
+        <div class="subtitle">
+            Kreativitas • Inovasi • Brainstorming
+        </div>
+
+    </div>
+
+    <div class="notice">
+        <b>Petunjuk:</b><br>
+        Silakan isi identitas terlebih dahulu sebelum memulai PTS.
+        Setiap nomor peserta akan mendapatkan urutan soal yang berbeda.
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+            <label>Nama Lengkap</label>
+            <input id="nama" type="text"
+                   placeholder="Masukkan nama lengkap">
+        </div>
+
+        <div class="field">
+            <label>NIS</label>
+            <input id="nis" type="text"
+                   placeholder="Masukkan NIS">
+        </div>
+
+        <div class="field">
+            <label>Kelas</label>
+
+            <select id="kelas">
+                <option value="">-- Pilih Kelas --</option>
+                <option>XI TKJ 1</option>
+                <option>XI TKJ 2</option>
+            </select>
+
+        </div>
+
+        <div class="field">
+            <label>Nomor Peserta</label>
+
+            <select id="peserta">
+                <option value="">-- Pilih Nomor --</option>
+            </select>
+
+        </div>
+
+    </div>
+
+    <div class="notice">
+
+        <b>Komposisi PTS</b>
+
+        <ul>
+            <li>20 soal Kreativitas</li>
+            <li>20 soal Inovasi</li>
+            <li>10 soal Brainstorming</li>
+            <li>Total 50 soal</li>
+            <li>Pilihan A, B, C, D, E</li>
+            <li>Waktu 90 menit</li>
+        </ul>
+
+    </div>
+
+    <div class="warning">
+        ⚠️ Setelah PTS dimulai, timer akan berjalan.
+        Pastikan koneksi/perangkat dalam kondisi baik.
+    </div>
+
+    <br>
+
+    <div class="center">
+
+        <button class="btn btn-large"
+                onclick="mulaiPTS()">
+            🚀 MULAI PTS
+        </button>
+
+        <button class="btn btn-secondary"
+                onclick="bukaGuru()">
+            👨‍🏫 MENU GURU
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+HALAMAN UJIAN
+===================================================== -->
+
+<section id="examPage" class="hidden">
+
+    <div class="timer" id="timer">
+        ⏱️ 90:00
+    </div>
+
+    <div class="card">
+
+        <div>
+            <b id="studentInfo"></b>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div id="questionArea"></div>
+
+        <div class="navigation">
+
+            <button class="btn btn-secondary"
+                    onclick="soalSebelumnya()">
+                ← Sebelumnya
+            </button>
+
+            <button class="btn"
+                    onclick="soalBerikutnya()">
+                Berikutnya →
+            </button>
+
+        </div>
+
+        <hr>
+
+        <b>Navigasi Soal</b>
+
+        <div class="navigator"
+             id="navigator"></div>
+
+        <br>
+
+        <div class="center">
+
+            <button class="btn btn-success btn-large"
+                    onclick="konfirmasiKirim()">
+                📤 KIRIM JAWABAN
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+HALAMAN HASIL
+===================================================== -->
+
+<section id="resultPage" class="hidden card">
+
+    <div class="result-box">
+
+        <div class="badge">
+            PTS SELESAI
+        </div>
+
+        <h2>Hasil PTS</h2>
+
+        <div class="result-score"
+             id="resultScore">
+            0
+        </div>
+
+        <p id="resultInfo"></p>
+
+        <div class="notice"
+             id="resultDetail"></div>
+
+        <button class="btn"
+                onclick="location.reload()">
+            🏠 Kembali ke Beranda
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+MENU GURU
+===================================================== -->
+
+<section id="teacherPage" class="hidden">
+
+    <div class="card">
+
+        <div class="title">
+            👨‍🏫 Dashboard Guru
+        </div>
+
+        <div class="subtitle">
+            Rekap hasil PTS KIK XI TKJ
+        </div>
+
+        <div class="teacher-bar">
+
+            <button class="btn"
+                    onclick="buatQR()">
+                📱 QR CODE PTS
+            </button>
+
+            <button class="btn btn-success"
+                    onclick="downloadCSV()">
+                📥 DOWNLOAD CSV
+            </button>
+
+            <button class="btn btn-warning"
+                    onclick="resetData()">
+                🗑️ RESET DATA
+            </button>
+
+            <button class="btn btn-secondary"
+                    onclick="kembaliBeranda()">
+                ← Kembali
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATISTIK -->
+
+    <div class="stat-grid">
+
+        <div class="stat">
+            <div class="number"
+                 id="statTotal">
+                40
+            </div>
+            <div class="label">
+                Total Peserta
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="number"
+                 id="statSelesai">
+                0
+            </div>
+            <div class="label">
+                Sudah Mengerjakan
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="number"
+                 id="statBelum">
+                40
+            </div>
+            <div class="label">
+                Belum Mengerjakan
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="number"
+                 id="statRata">
+                0
+            </div>
+            <div class="label">
+                Rata-rata
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- PENCARIAN -->
+
+    <div class="card">
+
+        <label>
+            <b>🔎 Cari siswa</b>
+        </label>
+
+        <input
+            id="search"
+            class="url-box"
+            placeholder="Cari nama, NIS, kelas, atau nomor peserta..."
+            oninput="renderRekap()"
+        >
+
+    </div>
+
+
+    <!-- REKAP -->
+
+    <div class="card">
+
+        <h3>📊 Rekap Nilai Peserta</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIS</th>
+                    <th>Kelas</th>
+                    <th>Paket</th>
+                    <th>Nilai</th>
+                    <th>Benar</th>
+                    <th>Salah</th>
+                    <th>Kosong</th>
+                    <th>Durasi</th>
+                    <th>Status</th>
+                </tr>
+
+                </thead>
+
+                <tbody id="rekapBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- QR -->
+
+    <div id="qrTeacher"
+         class="card hidden">
+
+        <div class="center">
+
+            <h2>📱 QR CODE PTS</h2>
+
+            <p>
+                Siswa scan QR Code berikut untuk membuka PTS.
+            </p>
+
+            <div class="qr-area">
+
+                <div id="qrcode"></div>
+
+                <input
+                    id="urlPTS"
+                    class="url-box"
+                    placeholder="Masukkan URL PTS">
+
+                <br>
+
+                <button class="btn"
+                        onclick="generateQR()">
+                    🔄 BUAT / PERBARUI QR
+                </button>
+
+                <button class="btn btn-secondary"
+                        onclick="window.print()">
+                    🖨️ CETAK QR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<footer class="footer">
+    SMKN 1 Kota Serang • Kreativitas, Inovasi, dan Kewirausahaan
+    <br>
+    <b>Risdianto, S.Kom.</b>
+</footer>
+
+
+<script>
+
+/* =====================================================
+DATABASE SOAL
+===================================================== */
+
+const bankSoal = [
+
+/* ================= KREATIVITAS 1-20 ================= */
+
+{
+m:"Kreativitas",
+q:"Apa yang dimaksud dengan kreativitas?",
+o:[
+"Kemampuan menghasilkan gagasan atau solusi baru yang bermanfaat",
+"Kemampuan menghafal banyak informasi",
+"Kemampuan mengikuti semua aturan tanpa perubahan",
+"Kemampuan menggunakan teknologi paling mahal",
+"Kemampuan bekerja tanpa melakukan evaluasi"
+],a:0},
+
+{
+m:"Kreativitas",
+q:"Tujuan utama kreativitas dalam bidang teknologi adalah...",
+o:[
+"Mengurangi penggunaan teknologi",
+"Menghasilkan solusi baru terhadap masalah",
+"Menghindari perubahan",
+"Mengikuti produk yang sudah ada",
+"Mengurangi kebutuhan pengguna"
+],a:1},
+
+{
+m:"Kreativitas",
+q:"Salah satu ciri orang kreatif adalah...",
+o:[
+"Takut mencoba",
+"Selalu menunggu perintah",
+"Memiliki rasa ingin tahu",
+"Menghindari masalah",
+"Tidak mau menerima masukan"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"Sumber ide kreatif yang paling dekat dengan kehidupan siswa TKJ adalah...",
+o:[
+"Masalah dan kebutuhan lingkungan",
+"Produk luar negeri saja",
+"Iklan televisi saja",
+"Perintah teman",
+"Materi hafalan"
+],a:0},
+
+{
+m:"Kreativitas",
+q:"Lab TKJ sering kehilangan kabel jaringan. Ide kreatif yang paling tepat adalah...",
+o:[
+"Membeli kabel sebanyak mungkin",
+"Menyalahkan siswa",
+"Mengunci semua kabel",
+"Membuat sistem inventaris kabel",
+"Menghentikan praktik"
+],a:3},
+
+{
+m:"Kreativitas",
+q:"Brainstorming terutama dilakukan untuk...",
+o:[
+"Menentukan nilai siswa",
+"Menghasilkan banyak gagasan",
+"Menghapus semua ide",
+"Mencari kesalahan teman",
+"Membuat laporan keuangan"
+],a:1},
+
+{
+m:"Kreativitas",
+q:"Mind Mapping bermanfaat untuk...",
+o:[
+"Menghapus gagasan",
+"Menghafalkan nomor komputer",
+"Menghubungkan gagasan secara visual",
+"Mengurangi jumlah ide",
+"Menggantikan praktik"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"SCAMPER dapat digunakan untuk...",
+o:[
+"Mengembangkan atau memodifikasi ide",
+"Menghentikan proses kreatif",
+"Menghapus kebutuhan pelanggan",
+"Menghindari diskusi",
+"Mengurangi alternatif solusi"
+],a:0},
+
+{
+m:"Kreativitas",
+q:"Contoh kreativitas siswa TKJ adalah...",
+o:[
+"Mengganti komputer tanpa analisis",
+"Membuat dashboard monitoring jaringan sederhana",
+"Menyalin pekerjaan teman",
+"Menghafal konfigurasi",
+"Menghindari proyek"
+],a:1},
+
+{
+m:"Kreativitas",
+q:"Jika sebuah ide belum berhasil, langkah yang tepat adalah...",
+o:[
+"Membuangnya langsung",
+"Menyalahkan anggota kelompok",
+"Menganalisis dan memperbaiki ide",
+"Berhenti mencoba",
+"Mengabaikan hasil"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"Hubungan kreativitas dengan pemecahan masalah adalah...",
+o:[
+"Menghasilkan berbagai alternatif solusi",
+"Menghindari masalah",
+"Mengurangi pilihan",
+"Mengikuti solusi pertama",
+"Menghapus kebutuhan pengguna"
+],a:0},
+
+{
+m:"Kreativitas",
+q:"Menggabungkan QR Code dengan sistem inventaris merupakan contoh...",
+o:[
+"Penghapusan ide",
+"Kombinasi dan pengembangan ide",
+"Peniruan produk",
+"Pengurangan inovasi",
+"Penghindaran teknologi"
+],a:1},
+
+{
+m:"Kreativitas",
+q:"Pertanyaan 'Bagaimana jika...?' dalam proses kreatif berguna untuk...",
+o:[
+"Mengakhiri diskusi",
+"Menghindari risiko",
+"Membuka kemungkinan alternatif",
+"Mengurangi ide",
+"Menentukan nilai"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"Contoh kreativitas dalam pelayanan teknisi jaringan adalah...",
+o:[
+"Mengabaikan pelanggan",
+"Membuat laporan perbaikan yang mudah dipahami",
+"Menghapus data pelanggan",
+"Menunda semua pekerjaan",
+"Menyalahkan pengguna"
+],a:1},
+
+{
+m:"Kreativitas",
+q:"Sebuah ide dapat dianggap kreatif apabila...",
+o:[
+"Selalu mahal",
+"Selalu menggunakan teknologi terbaru",
+"Memiliki kebaruan dan manfaat",
+"Belum pernah diuji",
+"Disukai pembuatnya saja"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"Dalam brainstorming, kritik terhadap ide sebaiknya...",
+o:[
+"Dilakukan sejak ide pertama",
+"Dilakukan sebelum ide muncul",
+"Dilakukan setelah pengumpulan ide",
+"Dilakukan untuk semua peserta",
+"Tidak pernah dilakukan"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"Jaringan laboratorium lambat dapat menjadi sumber ide kreatif dengan cara...",
+o:[
+"Menganalisis penggunaan bandwidth",
+"Mengganti semua komputer",
+"Mematikan jaringan",
+"Menyalahkan pengguna",
+"Menghapus router"
+],a:0},
+
+{
+m:"Kreativitas",
+q:"Prototype digunakan untuk...",
+o:[
+"Membuat bentuk awal solusi",
+"Menghapus produk",
+"Menghindari pengujian",
+"Mengganti kebutuhan pelanggan",
+"Menghentikan inovasi"
+],a:0},
+
+{
+m:"Kreativitas",
+q:"Kreativitas berkelanjutan membutuhkan...",
+o:[
+"Menunggu inspirasi",
+"Menyalin produk",
+"Belajar, mencoba, mengevaluasi, dan memperbaiki",
+"Menghindari kegagalan",
+"Menolak masukan"
+],a:2},
+
+{
+m:"Kreativitas",
+q:"Sekolah memiliki antrean panjang saat peminjaman alat TKJ. Jika siswa ingin membuat sistem digital, langkah kreatif pertama adalah...",
+o:[
+"Langsung membeli server",
+"Membuat aplikasi tanpa observasi",
+"Observasi masalah",
+"Menghapus sistem lama",
+"Membuat promosi"
+],a:2},
+
+
+/* ================= INOVASI 21-40 ================= */
+
+{
+m:"Inovasi",
+q:"Apa yang dimaksud dengan inovasi?",
+o:[
+"Penerapan atau pengembangan gagasan yang memberikan nilai",
+"Menghafalkan teknologi",
+"Menggunakan produk mahal",
+"Menolak perubahan",
+"Menyalin produk"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Perbedaan utama kreativitas dan inovasi adalah...",
+o:[
+"Kreativitas menghasilkan ide, inovasi menerapkan ide menjadi nilai",
+"Kreativitas dan inovasi tidak berhubungan",
+"Inovasi hanya menghasilkan ide",
+"Kreativitas hanya untuk bisnis",
+"Inovasi tidak membutuhkan ide"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Tujuan inovasi dalam bisnis adalah...",
+o:[
+"Mengurangi kebutuhan pelanggan",
+"Meningkatkan nilai dan manfaat",
+"Menghindari persaingan",
+"Menghilangkan produk",
+"Mengurangi pelayanan"
+],a:1},
+
+{
+m:"Inovasi",
+q:"Contoh inovasi produk dalam bidang TKJ adalah...",
+o:[
+"Mengembangkan perangkat atau sistem jaringan dengan fitur yang lebih sesuai kebutuhan",
+"Membeli produk tanpa perubahan",
+"Mengurangi kualitas perangkat",
+"Menyalin desain pesaing",
+"Menghapus fitur penting"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Perubahan alur kerja instalasi jaringan agar lebih cepat termasuk...",
+o:[
+"Inovasi produk",
+"Inovasi proses",
+"Inovasi pemasaran",
+"Inovasi administrasi",
+"Inovasi personal"
+],a:1},
+
+{
+m:"Inovasi",
+q:"Penggunaan cloud untuk menyimpan data pelanggan merupakan contoh...",
+o:[
+"Inovasi teknologi",
+"Inovasi administrasi",
+"Inovasi budaya",
+"Inovasi manual",
+"Inovasi tanpa manfaat"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Tahap awal proses inovasi adalah...",
+o:[
+"Membuat promosi",
+"Membeli peralatan",
+"Mengidentifikasi kebutuhan atau masalah pengguna",
+"Menentukan harga",
+"Membuat laporan"
+],a:2},
+
+{
+m:"Inovasi",
+q:"Prototype dalam proses inovasi digunakan untuk...",
+o:[
+"Menguji konsep awal",
+"Menghapus ide",
+"Menghindari pengguna",
+"Menghentikan pengembangan",
+"Mengganti seluruh sistem"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Pengujian produk dilakukan untuk...",
+o:[
+"Mengetahui apakah produk sesuai kebutuhan",
+"Membuat produk lebih mahal",
+"Menghindari evaluasi",
+"Menghapus masukan",
+"Mengurangi pengguna"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Pengguna mengeluh karena aplikasi terlalu sulit digunakan. Tindakan inovatif adalah...",
+o:[
+"Menyalahkan pengguna",
+"Menghapus aplikasi",
+"Memperbaiki berdasarkan masukan",
+"Mengabaikan keluhan",
+"Menambah fitur tanpa analisis"
+],a:2},
+
+{
+m:"Inovasi",
+q:"Contoh inovasi layanan IT adalah...",
+o:[
+"Sistem tiket pengaduan pelanggan",
+"Menghapus layanan pelanggan",
+"Mengurangi komunikasi",
+"Menunda pengaduan",
+"Mengabaikan pelanggan"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Monitoring jaringan secara real-time membantu teknisi karena...",
+o:[
+"Mengetahui kondisi jaringan lebih cepat",
+"Menghilangkan kebutuhan teknisi",
+"Mengurangi keamanan",
+"Menghapus data jaringan",
+"Menghentikan monitoring"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Inovasi yang berorientasi pengguna seharusnya...",
+o:[
+"Dibuat berdasarkan kebutuhan dan pengalaman pengguna",
+"Dibuat berdasarkan keinginan pembuat saja",
+"Selalu menggunakan teknologi mahal",
+"Mengabaikan kritik",
+"Tidak perlu pengujian"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Jika inovasi tidak memberikan manfaat yang diharapkan, tindakan yang tepat adalah...",
+o:[
+"Menghentikan semua kegiatan",
+"Menyalahkan pengguna",
+"Melakukan evaluasi dan perbaikan",
+"Mengabaikan hasil",
+"Menghapus data"
+],a:2},
+
+{
+m:"Inovasi",
+q:"Manfaat inovasi proses antara lain...",
+o:[
+"Efisiensi waktu dan sumber daya",
+"Menambah pekerjaan tanpa tujuan",
+"Mengurangi kualitas",
+"Menghilangkan pelanggan",
+"Menambah kesalahan"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Contoh inovasi sederhana di laboratorium TKJ adalah...",
+o:[
+"Sistem peminjaman alat menggunakan QR Code",
+"Mengunci semua alat",
+"Menghapus inventaris",
+"Membatasi praktik",
+"Mengurangi jumlah alat"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Sebelum menerapkan sistem jaringan baru, sebaiknya dilakukan...",
+o:[
+"Uji coba dan evaluasi",
+"Langsung digunakan",
+"Menghapus sistem lama",
+"Menambah biaya",
+"Mengabaikan pengguna"
+],a:0},
+
+{
+m:"Inovasi",
+q:"Inovasi berkelanjutan berarti...",
+o:[
+"Membuat produk sekali",
+"Terus mengevaluasi dan mengembangkan sesuai kebutuhan",
+"Menghindari perubahan",
+"Menolak masukan",
+"Menggunakan teknologi lama selamanya"
+],a:1},
+
+{
+m:"Inovasi",
+q:"Sebuah sistem baru lebih mahal tetapi manfaatnya sama dengan sistem lama. Langkah yang tepat adalah...",
+o:[
+"Langsung membeli",
+"Membandingkan biaya dan manfaat",
+"Menghapus sistem lama",
+"Mengikuti tren",
+"Mengabaikan biaya"
+],a:1},
+
+{
+m:"Inovasi",
+q:"Sistem pengingat otomatis untuk jadwal maintenance jaringan merupakan...",
+o:[
+"Inovasi berbasis kebutuhan pelanggan",
+"Penghapusan layanan",
+"Penurunan kualitas",
+"Administrasi manual",
+"Teknologi tanpa tujuan"
+],a:0},
+
+
+/* ================= BRAINSTORMING 41-50 ================= */
+
+{
+m:"Brainstorming",
+q:"Brainstorming adalah kegiatan untuk...",
+o:[
+"Menghasilkan banyak ide dalam waktu tertentu",
+"Menentukan nilai siswa",
+"Mencari kesalahan peserta",
+"Menghapus semua ide",
+"Membuat laporan keuangan"
+],a:0},
+
+{
+m:"Brainstorming",
+q:"Prinsip utama brainstorming adalah...",
+o:[
+"Menolak ide yang berbeda",
+"Menunda kritik terhadap ide saat tahap pengumpulan",
+"Memilih satu ide sejak awal",
+"Membatasi peserta",
+"Menghindari gagasan baru"
+],a:1},
+
+{
+m:"Brainstorming",
+q:"Peserta brainstorming sebaiknya...",
+o:[
+"Hanya mengikuti ketua",
+"Menunggu peserta lain",
+"Berani mengemukakan berbagai gagasan",
+"Menolak ide baru",
+"Tidak mencatat ide"
+],a:2},
+
+{
+m:"Brainstorming",
+q:"Setelah semua ide terkumpul, langkah berikutnya adalah...",
+o:[
+"Menyeleksi dan mengevaluasi ide",
+"Menghapus semua ide",
+"Memulai dari awal",
+"Menghentikan kegiatan",
+"Mengabaikan ide"
+],a:0},
+
+{
+m:"Brainstorming",
+q:"Kelompok siswa mencari solusi untuk Wi-Fi sekolah yang sering lambat. Tujuan brainstorming adalah...",
+o:[
+"Menghasilkan berbagai alternatif solusi",
+"Menentukan siswa terbaik",
+"Mencari kesalahan guru",
+"Menghapus jaringan",
+"Mengurangi jumlah ide"
+],a:0},
+
+{
+m:"Brainstorming",
+q:"Keberagaman anggota kelompok dapat...",
+o:[
+"Menghambat semua ide",
+"Memperkaya sudut pandang dan ide",
+"Mengurangi kreativitas",
+"Menghilangkan diskusi",
+"Mengurangi solusi"
+],a:1},
+
+{
+m:"Brainstorming",
+q:"Brainstorming lebih efektif apabila masalah...",
+o:[
+"Tidak jelas",
+"Dirumuskan dengan jelas",
+"Selalu berubah",
+"Tidak berkaitan",
+"Tidak diketahui peserta"
+],a:1},
+
+{
+m:"Brainstorming",
+q:"Topik brainstorming yang tepat untuk siswa TKJ adalah...",
+o:[
+"Bagaimana membuat sistem absensi siswa berbasis QR Code?",
+"Bagaimana mengurangi kegiatan praktik?",
+"Bagaimana menghapus jaringan sekolah?",
+"Bagaimana membuat siswa tidak menggunakan komputer?",
+"Bagaimana menghentikan semua layanan?"
+],a:0},
+
+{
+m:"Brainstorming",
+q:"Jika kelompok hanya menghasilkan sedikit ide, guru dapat...",
+o:[
+"Memarahi kelompok",
+"Memberikan pertanyaan pemantik",
+"Menghentikan kegiatan",
+"Menghapus ide",
+"Memberikan nilai nol"
+],a:1},
+
+{
+m:"Brainstorming",
+q:"Hasil brainstorming yang baik seharusnya...",
+o:[
+"Langsung digunakan tanpa evaluasi",
+"Dicatat, dikelompokkan, kemudian dipilih berdasarkan kriteria",
+"Dihapus setelah diskusi",
+"Hanya menggunakan ide ketua",
+"Tidak perlu didokumentasikan"
+],a:1}
+
+];
+
+
+/* =====================================================
+DATA APLIKASI
+===================================================== */
+
+let soalAktif=[];
+let jawaban=[];
+let nomorSekarang=0;
+let pesertaAktif=0;
+let waktuTersisa=90*60;
+let timerInterval=null;
+let waktuMulai=null;
+let dataSiswa={};
+
+
+/* =====================================================
+ISI NOMOR PESERTA 1-40
+===================================================== */
+
+const pesertaSelect=document.getElementById("peserta");
+
+for(let i=1;i<=40;i++){
+
+    const option=document.createElement("option");
+
+    option.value=i;
+    option.textContent=
+        "Peserta "+String(i).padStart(2,"0");
+
+    pesertaSelect.appendChild(option);
+
+}
+
+
+/* =====================================================
+URUTAN DASAR 50 SOAL
+===================================================== */
+
+const baseOrder=[
+12,37,4,29,1,44,18,33,7,25,
+49,16,40,3,31,9,21,46,14,27,
+5,35,10,42,0,23,39,6,28,17,
+45,11,32,8,20,48,15,34,2,41,
+24,43,19,36,13,47,30,22,38,26
+];
+
+
+/* =====================================================
+SHUFFLE DETERMINISTIK
+===================================================== */
+
+function seededRandom(seed){
+
+    let x=Math.sin(seed)*10000;
+
+    return x-Math.floor(x);
+}
+
+
+function shuffleSeed(array,seed){
+
+    let arr=[...array];
+
+    for(let i=arr.length-1;i>0;i--){
+
+        const j=Math.floor(
+            seededRandom(seed+i)* (i+1)
+        );
+
+        [arr[i],arr[j]]=
+        [arr[j],arr[i]];
+
+    }
+
+    return arr;
+}
+
+
+/* =====================================================
+MEMBUAT PAKET 1-40
+===================================================== */
+
+function buatPaket(noPeserta){
+
+    const rot=(noPeserta-1)%50;
+
+    let order=[];
+
+    for(let i=0;i<50;i++){
+
+        order.push(
+            baseOrder[(i+rot)%50]
+        );
+
+    }
+
+    return order.map(index=>{
+
+        const asli=bankSoal[index];
+
+        let opsi=[];
+
+        for(let i=0;i<5;i++){
+            opsi.push({
+                text:asli.o[i],
+                original:i
+            });
+        }
+
+        /*
+        Setiap peserta mendapat
+        urutan opsi yang berbeda,
+        tetapi tetap konsisten.
+        */
+
+        opsi=shuffleSeed(
+            opsi,
+            noPeserta*1000+index
+        );
+
+        const jawabanBaru=
+            opsi.findIndex(
+                x=>x.original===asli.a
+            );
+
+        return{
+            ...asli,
+            o:opsi.map(x=>x.text),
+            a:jawabanBaru,
+            originalIndex:index
+        };
+
+    });
+
+}
+
+
+/* =====================================================
+MULAI PTS
+===================================================== */
+
+function mulaiPTS(){
+
+    const nama=
+        document.getElementById("nama").value.trim();
+
+    const nis=
+        document.getElementById("nis").value.trim();
+
+    const kelas=
+        document.getElementById("kelas").value;
+
+    const peserta=
+        document.getElementById("peserta").value;
+
+
+    if(!nama || !nis || !kelas || !peserta){
+
+        alert(
+            "Lengkapi Nama, NIS, Kelas, dan Nomor Peserta terlebih dahulu."
+        );
+
+        return;
+    }
+
+
+    pesertaAktif=parseInt(peserta);
+
+    dataSiswa={
+        nama,
+        nis,
+        kelas,
+        peserta:pesertaAktif
+    };
+
+
+    /*
+    Cek apakah peserta sudah mengirim.
+    */
+
+    const hasil=
+        JSON.parse(
+            localStorage.getItem("PTS_KIK_HASIL")||"[]"
+        );
+
+    const sudah=
+        hasil.find(
+            x=>Number(x.peserta)===pesertaAktif
+        );
+
+    if(sudah){
+
+        const lanjut=
+            confirm(
+                "Nomor peserta ini sudah memiliki hasil PTS.\n\n"+
+                "Apakah ingin memulai ulang?\n"+
+                "Data lama akan digantikan setelah dikirim."
+            );
+
+        if(!lanjut)return;
+    }
+
+
+    soalAktif=
+        buatPaket(pesertaAktif);
+
+    jawaban=
+        new Array(50).fill(null);
+
+    nomorSekarang=0;
+
+    waktuTersisa=90*60;
+
+    waktuMulai=
+        new Date();
+
+
+    document.getElementById("homePage")
+        .classList.add("hidden");
+
+    document.getElementById("examPage")
+        .classList.remove("hidden");
+
+    document.getElementById("resultPage")
+        .classList.add("hidden");
+
+    document.getElementById("teacherPage")
+        .classList.add("hidden");
+
+
+    document.getElementById("studentInfo")
+        .textContent=
+        nama+
+        " | "+kelas+
+        " | Peserta "+
+        String(pesertaAktif).padStart(2,"0");
+
+
+    renderSoal();
+
+    mulaiTimer();
+
+    simpanDraft();
+
+}
+
+
+/* =====================================================
+RENDER SOAL
+===================================================== */
+
+function renderSoal(){
+
+    const soal=
+        soalAktif[nomorSekarang];
+
+    let html="";
+
+    html+=`
+        <div class="question-number">
+            Soal ${nomorSekarang+1} dari 50
+            <span class="badge">${soal.m}</span>
+        </div>
+    `;
+
+    html+=`
+        <div class="question-text">
+            ${soal.q}
+        </div>
+    `;
+
+
+    soal.o.forEach((opsi,index)=>{
+
+        const huruf=
+            String.fromCharCode(65+index);
+
+        const selected=
+            jawaban[nomorSekarang]===index
+            ?"selected":"";
+
+
+        html+=`
+        <label class="option ${selected}">
+
+            <input
+                type="radio"
+                name="jawaban"
+                value="${index}"
+                ${selected?"checked":""}
+                onchange="pilihJawaban(${index})"
+            >
+
+            <div>
+                <b>${huruf}.</b>
+                ${opsi}
+            </div>
+
+        </label>
+        `;
+
+    });
+
+
+    document.getElementById("questionArea")
+        .innerHTML=html;
+
+
+    renderNavigator();
+
+    updateProgress();
+
+}
+
+
+/* =====================================================
+PILIH JAWABAN
+===================================================== */
+
+function pilihJawaban(index){
+
+    jawaban[nomorSekarang]=index;
+
+    simpanDraft();
+
+    renderSoal();
+
+}
+
+
+/* =====================================================
+NAVIGATOR
+===================================================== */
+
+function renderNavigator(){
+
+    const nav=
+        document.getElementById("navigator");
+
+    nav.innerHTML="";
+
+    for(let i=0;i<50;i++){
+
+        const btn=
+            document.createElement("button");
+
+        btn.className="nav-number";
+
+        if(jawaban[i]!==null){
+            btn.classList.add("answered");
+        }else{
+            btn.classList.add("unanswered");
+        }
+
+        if(i===nomorSekarang){
+            btn.classList.add("current");
+        }
+
+        btn.textContent=i+1;
+
+        btn.onclick=()=>{
+            nomorSekarang=i;
+            renderSoal();
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+        };
+
+        nav.appendChild(btn);
+    }
+
+}
+
+
+/* =====================================================
+PROGRESS
+===================================================== */
+
+function updateProgress(){
+
+    const jumlah=
+        jawaban.filter(
+            x=>x!==null
+        ).length;
+
+    const persen=
+        Math.round(jumlah/50*100);
+
+    document.getElementById("progress")
+        .style.width=persen+"%";
+
+}
+
+
+/* =====================================================
+NAVIGASI
+===================================================== */
+
+function soalSebelumnya(){
+
+    if(nomorSekarang>0){
+
+        nomorSekarang--;
+
+        renderSoal();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+
+}
+
+
+function soalBerikutnya(){
+
+    if(nomorSekarang<49){
+
+        nomorSekarang++;
+
+        renderSoal();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+TIMER
+===================================================== */
+
+function mulaiTimer(){
+
+    clearInterval(timerInterval);
+
+    timerInterval=
+        setInterval(()=>{
+
+            waktuTersisa--;
+
+            tampilkanTimer();
+
+            if(waktuTersisa<=0){
+
+                clearInterval(timerInterval);
+
+                alert(
+                    "Waktu habis. Jawaban akan dikirim otomatis."
+                );
+
+                kirimJawaban();
+
+            }
+
+        },1000);
+
+}
+
+
+function tampilkanTimer(){
+
+    const menit=
+        Math.floor(waktuTersisa/60);
+
+    const detik=
+        waktuTersisa%60;
+
+    const text=
+        "⏱️ "+
+        String(menit).padStart(2,"0")+
+        ":"+
+        String(detik).padStart(2,"0");
+
+
+    const timer=
+        document.getElementById("timer");
+
+    timer.textContent=text;
+
+
+    timer.classList.remove(
+        "warning-time",
+        "danger-time"
+    );
+
+
+    if(waktuTersisa<=600){
+
+        timer.classList.add(
+            "warning-time"
+        );
+
+    }
+
+    if(waktuTersisa<=300){
+
+        timer.classList.remove(
+            "warning-time"
+        );
+
+        timer.classList.add(
+            "danger-time"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+KONFIRMASI KIRIM
+===================================================== */
+
+function konfirmasiKirim(){
+
+    const kosong=
+        jawaban.filter(
+            x=>x===null
+        ).length;
+
+
+    let pesan=
+        "Apakah Anda yakin ingin mengirim jawaban?";
+
+
+    if(kosong>0){
+
+        pesan+=
+            "\n\nMasih ada "+
+            kosong+
+            " soal yang belum dijawab.";
+
+    }
+
+
+    if(confirm(pesan)){
+
+        kirimJawaban();
+
+    }
+
+}
+
+
+/* =====================================================
+KIRIM / NILAI
+===================================================== */
+
+function kirimJawaban(){
+
+    clearInterval(timerInterval);
+
+
+    let benar=0;
+
+    for(let i=0;i<50;i++){
+
+        if(
+            jawaban[i]!==null &&
+            jawaban[i]===soalAktif[i].a
+        ){
+
+            benar++;
+
+        }
+
+    }
+
+
+    const salah=
+        jawaban.filter(
+            x=>x!==null
+        ).length-benarsafe(benar);
+
+
+    const kosong=
+        jawaban.filter(
+            x=>x===null
+        ).length;
+
+
+    const nilai=
+        Math.round(
+            benar/50*100
+        );
+
+
+    const durasi=
+        90-
+        Math.floor(
+            waktuTersisa/60
+        );
+
+
+    const hasil={
+        timestamp:new Date().toLocaleString("id-ID"),
+        nama:dataSiswa.nama,
+        nis:dataSiswa.nis,
+        kelas:dataSiswa.kelas,
+        peserta:dataSiswa.peserta,
+        paket:
+            "Paket "+String(dataSiswa.peserta)
+                .padStart(2,"0"),
+        nilai,
+        benar,
+        salah,
+        kosong,
+        durasi,
+        status:"Selesai"
+    };
+
+
+    simpanHasil(hasil);
+
+
+    document.getElementById("examPage")
+        .classList.add("hidden");
+
+    document.getElementById("resultPage")
+        .classList.remove("hidden");
+
+
+    document.getElementById("resultScore")
+        .textContent=nilai;
+
+
+    document.getElementById("resultInfo")
+        .innerHTML=
+        `<b>${dataSiswa.nama}</b><br>
+        ${dataSiswa.kelas} • Peserta ${dataSiswa.peserta}`;
+
+
+    document.getElementById("resultDetail")
+        .innerHTML=
+        `
+        <b>Benar:</b> ${benar}<br>
+        <b>Salah:</b> ${salah}<br>
+        <b>Tidak dijawab:</b> ${kosong}<br>
+        <b>Durasi:</b> ${durasi} menit
+        `;
+
+
+    localStorage.removeItem(
+        "PTS_KIK_DRAFT"
+    );
+
+}
+
+
+/*
+Fungsi pengaman agar tidak menghasilkan
+nilai salah karena variabel.
+*/
+
+function benarsafe(x){
+    return x;
+}
+
+
+/* =====================================================
+SIMPAN HASIL
+===================================================== */
+
+function simpanHasil(data){
+
+    let hasil=
+        JSON.parse(
+            localStorage.getItem("PTS_KIK_HASIL")||"[]"
+        );
+
+
+    hasil=
+        hasil.filter(
+            x=>Number(x.peserta)!==
+            Number(data.peserta)
+        );
+
+
+    hasil.push(data);
+
+    hasil.sort(
+        (a,b)=>
+        Number(a.peserta)-
+        Number(b.peserta)
+    );
+
+
+    localStorage.setItem(
+        "PTS_KIK_HASIL",
+        JSON.stringify(hasil)
+    );
+
+}
+
+
+/* =====================================================
+DRAFT
+===================================================== */
+
+function simpanDraft(){
+
+    if(!dataSiswa.nama)return;
+
+    const draft={
+        dataSiswa,
+        pesertaAktif,
+        jawaban,
+        nomorSekarang,
+        waktuTersisa
+    };
+
+    localStorage.setItem(
+        "PTS_KIK_DRAFT",
+        JSON.stringify(draft)
+    );
+
+}
+
+
+/* =====================================================
+MENU GURU
+===================================================== */
+
+function bukaGuru(){
+
+    const pin=
+        prompt(
+            "Masukkan PIN Guru:"
+        );
+
+    if(pin!=="123456"){
+
+        alert("PIN Guru salah.");
+
+        return;
+    }
+
+
+    document.getElementById("homePage")
+        .classList.add("hidden");
+
+    document.getElementById("examPage")
+        .classList.add("hidden");
+
+    document.getElementById("resultPage")
+        .classList.add("hidden");
+
+    document.getElementById("teacherPage")
+        .classList.remove("hidden");
+
+
+    renderRekap();
+
+}
+
+
+/* =====================================================
+REKAP GURU
+===================================================== */
+
+function renderRekap(){
+
+    const hasil=
+        JSON.parse(
+            localStorage.getItem("PTS_KIK_HASIL")||"[]"
+        );
+
+
+    const search=
+        (
+            document.getElementById("search")
+            ?.value||""
+        ).toLowerCase();
+
+
+    const body=
+        document.getElementById("rekapBody");
+
+    body.innerHTML="";
+
+
+    let jumlahSelesai=0;
+    let totalNilai=0;
+
+
+    for(let no=1;no<=40;no++){
+
+        const data=
+            hasil.find(
+                x=>Number(x.peserta)===no
+            );
+
+
+        if(data){
+
+            jumlahSelesai++;
+
+            totalNilai+=Number(data.nilai)||0;
+
+        }
+
+
+        const text=
+            data?
+            (
+                data.nama+" "+
+                data.nis+" "+
+                data.kelas+" "+
+                no
+            ).toLowerCase()
+            :
+            ("peserta "+no).toLowerCase();
+
+
+        if(
+            search &&
+            !text.includes(search)
+        ){
+
+            continue;
+
+        }
+
+
+        const tr=
+            document.createElement("tr");
+
+
+        if(data){
+
+            tr.innerHTML=`
+
+            <td>${no}</td>
+
+            <td>${escapeHTML(data.nama)}</td>
+
+            <td>${escapeHTML(data.nis)}</td>
+
+            <td>${escapeHTML(data.kelas)}</td>
+
+            <td>${data.paket}</td>
+
+            <td><b>${data.nilai}</b></td>
+
+            <td>${data.benar}</td>
+
+            <td>${data.salah}</td>
+
+            <td>${data.kosong}</td>
+
+            <td>${data.durasi} mnt</td>
+
+            <td>
+                <span class="status status-selesai">
+                    SELESAI
+                </span>
+            </td>
+
+            `;
+
+        }else{
+
+            tr.innerHTML=`
+
+            <td>${no}</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>
+                Paket ${String(no).padStart(2,"0")}
+            </td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <span class="status status-belum">
+                    BELUM
+                </span>
+            </td>
+
+            `;
+
+        }
+
+
+        body.appendChild(tr);
+
+    }
+
+
+    document.getElementById("statTotal")
+        .textContent=40;
+
+
+    document.getElementById("statSelesai")
+        .textContent=jumlahSelesai;
+
+
+    document.getElementById("statBelum")
+        .textContent=40-jumlahSelesai;
+
+
+    document.getElementById("statRata")
+        .textContent=
+        jumlahSelesai?
+        Math.round(
+            totalNilai/jumlahSelesai
+        )
+        :
+        0;
+
+}
+
+
+/* =====================================================
+ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+DOWNLOAD CSV
+===================================================== */
+
+function downloadCSV(){
+
+    const hasil=
+        JSON.parse(
+            localStorage.getItem("PTS_KIK_HASIL")||"[]"
+        );
+
+
+    let csv=
+        "No Peserta,Nama,NIS,Kelas,Paket,Nilai,Benar,Salah,Kosong,Durasi,Status,Timestamp\n";
+
+
+    for(let no=1;no<=40;no++){
+
+        const d=
+            hasil.find(
+                x=>Number(x.peserta)===no
+            );
+
+
+        if(d){
+
+            csv+=[
+                no,
+                d.nama,
+                d.nis,
+                d.kelas,
+                d.paket,
+                d.nilai,
+                d.benar,
+                d.salah,
+                d.kosong,
+                d.durasi,
+                d.status,
+                d.timestamp
+            ]
+            .map(csvEscape)
+            .join(",")
+            +"\n";
+
+        }else{
+
+            csv+=
+                [
+                    no,
+                    "",
+                    "",
+                    "",
+                    "Paket "+String(no)
+                        .padStart(2,"0"),
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "BELUM",
+                    ""
+                ]
+                .map(csvEscape)
+                .join(",")
+                +"\n";
+
+        }
+
+    }
+
+
+    const blob=
+        new Blob(
+            ["\ufeff"+csv],
+            {
+                type:"text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url=
+        URL.createObjectURL(blob);
+
+
+    const a=
+        document.createElement("a");
+
+    a.href=url;
+
+    a.download=
+        "Rekap_PTS_KIK_XI_TKJ.csv";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+function csvEscape(value){
+
+    value=
+        String(value??"");
+
+    if(
+        value.includes(",")||
+        value.includes('"')||
+        value.includes("\n")
+    ){
+
+        return '"'+
+            value.replace(/"/g,'""')+
+            '"';
+
+    }
+
+    return value;
+
+}
+
+
+/* =====================================================
+RESET DATA
+===================================================== */
+
+function resetData(){
+
+    const yakin=
+        confirm(
+            "PERINGATAN!\n\n"+
+            "Semua data hasil PTS pada browser ini akan dihapus.\n\n"+
+            "Lanjutkan?"
+        );
+
+
+    if(!yakin)return;
+
+
+    localStorage.removeItem(
+        "PTS_KIK_HASIL"
+    );
+
+    localStorage.removeItem(
+        "PTS_KIK_DRAFT"
+    );
+
+
+    renderRekap();
+
+    alert("Data berhasil dihapus.");
+
+}
+
+
+/* =====================================================
+QR CODE
+===================================================== */
+
+function buatQR(){
+
+    const box=
+        document.getElementById("qrTeacher");
+
+    box.classList.remove("hidden");
+
+
+    /*
+    Default URL adalah URL halaman saat ini.
+    */
+
+    const urlInput=
+        document.getElementById("urlPTS");
+
+
+    if(
+        !urlInput.value &&
+        location.protocol!=="file:"
+    ){
+
+        urlInput.value=
+            location.href;
+
+    }
+
+
+    generateQR();
+
+    box.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+function generateQR(){
+
+    const url=
+        document.getElementById("urlPTS")
+        .value.trim();
+
+
+    if(!url){
+
+        alert(
+            "Masukkan URL halaman PTS terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    const container=
+        document.getElementById("qrcode");
+
+
+    container.innerHTML="";
+
+
+    new QRCode(
+        container,
+        {
+            text:url,
+            width:300,
+            height:300,
+            correctLevel:
+                QRCode.CorrectLevel.H
+        }
+    );
+
+}
+
+
+/* =====================================================
+KEMBALI
+===================================================== */
+
+function kembaliBeranda(){
+
+    document.getElementById("teacherPage")
+        .classList.add("hidden");
+
+    document.getElementById("homePage")
+        .classList.remove("hidden");
+
+}
+
+
+window.addEventListener(
+    "beforeunload",
+    function(e){
+
+        if(
+            !document
+            .getElementById("examPage")
+            .classList
+            .contains("hidden")
+        ){
+
+            e.preventDefault();
+
+            e.returnValue="";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+CEK URL QR
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        /*
+        Jika halaman dibuka dengan:
+        ?guru=1
+        maka langsung membuka dashboard guru.
+        */
+
+        const params=
+            new URLSearchParams(
+                location.search
+            );
+
+        if(params.get("guru")==="1"){
+
+            bukaGuru();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
